@@ -11,6 +11,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
+Linker=
 IsCpp=0
 Icon=
 ExeOutput=
