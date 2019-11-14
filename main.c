@@ -52,20 +52,59 @@ int getIntegerInput(void)
 //card processing functions ---------------
 
 //calculate the actual card number in the blackjack game
-int getCardNum(int cardnum) 
+int A; //Ace
+
+int getCardNum(int cardnum)
 {
+	int CardTray[4][13] =
+	{	{0,1,2,3,4,5,6,7,8,9,10,11,12},
+		{0,1,2,3,4,5,6,7,8,9,10,11,12},
+		{0,1,2,3,4,5,6,7,8,9,10,11,12},
+		{0,1,2,3,4,5,6,7,8,9,10,11,12}	
+	};
+	
+	cardnum = CardTray[4][13];
+	
+	int i,value;
+	
+	for(i=1;i<11;i++)
+		{
+			if(cardnum = i)
+			value = i+1;
+		}
+	if(cardnum = 0)
+		value = A;
+	else if(cardnum >= 11)
+		value = 10;
+		
+	return value;
 }
+
+
 
 //print the card information (e.g. DiaA)
 void printCard(int cardnum) 
 {
+	int shape, num;
+	char Hrt, Dia, Spd, Clv;
 	
+	int i;
+	
+		if(i==1)
+			shape = Hrt;
+		else if(i=2)
+			shape = Dia;
+		else if(i=3)
+			shape = Spd;
+		else if(i=4)
+			shape = Clv;
+			
+	printf("%s%d", shape, num);
 }
 
 //mix the card sets and put in the array
 int mixCardTray(void) 
 {
-	
 	
 }
 
@@ -104,12 +143,35 @@ void offerCards(void)
 		cardhold[i][0] = pullCard();
 		cardhold[i][1] = pullCard();
 	}
+
 	//2. give two card for the operator
 	cardhold[n_user][0] = pullCard();
 	cardhold[n_user][1] = pullCard();
 	
 	return;
 }
+
+//print initial card status
+void printCardInitialStatus(void) 
+{
+	
+}
+
+
+
+
+// calculate the card sum and see if : 1. under 21, 2. over 21, 3. blackjack
+int calcStepResult() 
+{
+	int cardsum;
+	
+	if(cardsum == 21)
+		printf("");
+}
+
+
+
+
 
 
 
@@ -132,21 +194,36 @@ int main(int argc, char *argv[])
 
 
 	
-	mixCardTray();
+
 	printf(" --> card is mixed and put into the tray\n"); 
 
 	
-	printf("------------------------------------------------\n--------- ROUND 1 (cardIndex : 0) ----------\n------------------------------------------------\n");
+	do {
+		printf("\n-------- BETTING STEP --------\n");
+		betDollar();
+		
+		printf("\n-------- CARD OFFERING -------\n");
+		offerCards(); //1. give cards to all the players
+		
+		printCardInitialStatus();
+		printf("\n------------------ GAME start --------------------------\n");
+		
+		//each player's turn
+		for (i=0;i<n_user;i++) //each player
+		{
+			while () //do until the player dies or player says stop
+			{
+				//print current card status printUserCardStatus();
+				//check the card status ::: calcStepResult()
+				//GO? STOP? ::: getAction()
+				//check if the turn ends or not
+			}
+		}
+		
+		//result
+		checkResult();
+	} while (gameEnd == 0);
 	
-	//betting step
-	printf("\n-------- BETTING STEP --------\n");
-	betDollar();
-	
-	//card offering
-	printf("\n-------- CARD OFFERING -------\n");
-	offerCards();
-
-
 	
 	return 0;
 }
