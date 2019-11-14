@@ -25,6 +25,12 @@ int cardSum[N_MAX_USER];					//sum of the cards
 int bet[N_MAX_USER];						//current betting 
 int gameEnd = 0; 							//game end flag
 
+
+
+
+
+
+
 //some utility functions
 
 //get an integer input from standard input (keyboard)
@@ -59,14 +65,62 @@ void printCard(int cardnum)
 //mix the card sets and put in the array
 int mixCardTray(void) 
 {
-	srand((unsigned)time(NULL));
 	
+	
+}
+
+//betting
+int betDollar(void) 
+{
+	int i;
+	do
+	{
+		printf(" --> your betting (total: $50) : ");
+		scanf("%d",&bet[N_MAX_USER]);
+		if(bet[N_MAX_USER]>50)
+			printf(" ¡Ú You only have $50! Bet again\n");
+	} 
+	while(bet[N_MAX_USER]>50);
+	
+	for(i=1;i<n_user;i++)
+	{	
+		printf(" --> player%d bets $%d (out of $50)\n", i, rand()%N_MAX_BET);
+	}
+}
+
+//get one card from the tray
+int pullCard(void) 
+{
+	
+}
+
+//offering initial 2 cards
+void offerCards(void) 
+{
+	int i;
+	//1. give two card for each players
+	for (i=0;i<n_user;i++)
+	{
+		cardhold[i][0] = pullCard();
+		cardhold[i][1] = pullCard();
+	}
+	//2. give two card for the operator
+	cardhold[n_user][0] = pullCard();
+	cardhold[n_user][1] = pullCard();
+	
+	return;
 }
 
 
 
+
+
+// Game Start!!!!!!!!!!!!!!!!!!
 int main(int argc, char *argv[]) 
 {
+	srand((unsigned)time(NULL));
+	
+	int i;
 	do
 	{
 		printf("Input the number of players (MAX : 5) : ");
@@ -75,16 +129,23 @@ int main(int argc, char *argv[])
 			printf("Too many players!\n");
 	}
 	while(n_user>5);
+
+
 	
-	printf(" --> card is mixed and put into the tray\n");
+	mixCardTray();
+	printf(" --> card is mixed and put into the tray\n"); 
+
+	
 	printf("------------------------------------------------\n--------- ROUND 1 (cardIndex : 0) ----------\n------------------------------------------------\n");
 	
-
+	//betting step
 	printf("\n-------- BETTING STEP --------\n");
-	printf(" --> your betting (total: $50) : ");
+	betDollar();
 	
+	//card offering
 	printf("\n-------- CARD OFFERING -------\n");
-	
+	offerCards();
+
 
 	
 	return 0;
