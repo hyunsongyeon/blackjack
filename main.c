@@ -66,15 +66,16 @@ int getCardNum(int cardnum)
 //print the card information (e.g. DiaA)
 void printCard(int cardnum) 
 {	
-	char shape;
+	char shape
+	
 	if(0<=cardnum || 14>=cardnum)
-		shape = Hrt;
+		shape = "Hrt";
 	else if(13<=cardnum || 25>=cardnum)
-		shape = Dia;
+		shape = "Dia";
 	else if(26<=cardnum || 38>=cardnum)
-		shape = Spd;
+		shape = "Spd";
 	else if(39<=cardnum || 51>=cardnum)
-		shape = Clv;
+		shape = "Clv";
 	
 	int value = getCardNum(cardnum);
 	
