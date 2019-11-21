@@ -108,10 +108,14 @@ int mixCardTray(void)
 	
 	int i,j;
 	for(i=0;i<52;i++)
+	{
 		CardTray[i] = rand() % 51+0;
 		for(j=0;j<i;j++)
+		{
 			if(CardTray[i] == CardTray[j])
-                i--;
+        	i--;
+		}
+	}
 	
 	printf("--> card is mixed and put into the tray\n");
 	
@@ -263,7 +267,7 @@ int main(int argc, char *argv[]) {
 	mixCardTray();
 
 	//Game start --------
-
+	do{
 		printf(" ------------------ROUND %d (cardIndex : %d)-------------------\n", roundIndex, cardIndex);
 		
 		betDollar();
@@ -271,9 +275,22 @@ int main(int argc, char *argv[]) {
 		printCardInitialStatus();
 		
 		printf("\n------------------ GAME start --------------------------\n");
+		//each player's turn
+		for () //each player
+		{
+			while () //do until the player dies or player says stop
+			{
+			printUserCardStatus(); //print current card status printUserCardStatus();
+			calcStepResult();	//check the card status ::: calcStepResult()
+			getAction();	//GO? STOP? ::: getAction()
+				//check if the turn ends or not
+			}
+		}
+		checkResult();
 		
-		
+	}while(gameEnd == 0);
 	
+	checkWinner();
 	
 	return 0;
 }
