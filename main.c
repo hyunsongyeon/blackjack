@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define N_CARDSET			1
 #define N_CARD				52
@@ -56,18 +57,18 @@ int getCardNum(int cardnum)
 	char* value;
 	int i,j;
 
-	for(j=0;j<4;j++)
-		for(i=1;i<10;i++)
+	for(i=0;i<4;i++)
+		for(j=1;j<10;j++)
 			{
-				if(cardnum = i + (j*13))
-					value = i+1;
+				if(cardnum == (j + i*13))
+					value = j+1;
 			}
 			
 	for(i=0;i<4;i++)
 	{
-		if(cardnum == (i*13))
+		if(cardnum == i*13)
 			value = "Ace";
-		else if(cardnum == (10 + (i*13)))
+		else if(cardnum == 10 + (i*13))
 			value = "Jack";
 		else if(cardnum == 11 + (i*13))
 			value = "Queen";
@@ -105,10 +106,13 @@ int mixCardTray(void)
 {
 	srand((unsigned)time(NULL));
 	
-	int i;
+	int i,j;
 	for(i=0;i<52;i++)
-		CardTray[i] = rand() %51;
-
+		CardTray[i] = rand() % 51+0;
+		for(j=0;j<i;j++)
+			if(CardTray[i] == CardTray[j])
+                i--;
+	
 	printf("--> card is mixed and put into the tray\n");
 	
 	return CardTray[N_CARDSET*N_CARD];
@@ -118,7 +122,7 @@ int mixCardTray(void)
 int pullCard(void) 
 {	
 	srand((unsigned)time(NULL));
-	return CardTray[rand()%51];
+	return CardTray[rand()%51+0];
 }
 
 
